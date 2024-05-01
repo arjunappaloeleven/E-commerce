@@ -6,8 +6,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import qr from '../assets/qr.png'
 import Swal from 'sweetalert2';
 import Breadcrumb from '../components/Breadcrumb';
+import { height } from '@fortawesome/free-brands-svg-icons/fa42Group';
 
 const Title = styled.h1`
   font-size: 24px;
@@ -131,9 +133,39 @@ const Checkout = () => {
   const subTotal = cart.items.reduce((total, item) => total + item.subTotal, 0);
   const totalOrder = subTotal + deliveryOptions[selectedDeliveryOption].cost;
   const [amount, setamount] = useState('');
-
+ 
   const handlep = (e)=>{
-    
+    e.preventDefault();
+    console.log('Submit button clicked');
+    if(totalOrder === ""){
+    alert("please enter amount");
+    }else{
+      var options = {
+        key: "rzp_test_5YeSUHMsYu7Xg4",
+        key_secret:"r9VORt3meFUEGjixNHJAUs59",
+        amount: totalOrder*100,
+        currency:"INR",
+        name:"Sri Ganesh",
+        description:"",
+        handler: function(response){
+          alert(response.razorpay_payment_id);
+          handleOrderPlace();
+        },
+        prefill: {
+          name:"ARJUN A",
+          email:"arjun@gmail.com",
+          contact:"9342392541"
+        },
+        notes:{
+          address:"Razorpay Corporate office"
+        },
+        theme: {
+          color:"#3399cc"
+        }
+      };
+      var pay = new window.Razorpay(options);
+      pay.open();
+    }
   }
 
   return (
@@ -249,7 +281,9 @@ const Checkout = () => {
                   </Button>  <Button className="my-3 px-4" handleClick={handlep}>
                     Pay Now
                   </Button>
-                  <img src="https://lh3.googleusercontent.com/pw/AP1GczPx4Y7O3OYAC6WvLZXTAvtQXXPoCB15uL1mXoqLgGm-uyyLMbi4z661Tc3fbLEbX5Mbqfti-o30nu7w3726vXv_i_g8Tn7RBYbK3gWHfRS_Ak-A81AgNbtexZQc76gBeezGDu6tdzw5vDR7zEs0-L6nJbO38w9xEH49pNxkxkPt6XKQh2Ye0STQ-TGqsMkDWjnsUgbxXdIHgd60jllNIVSQXkeHnrTsBT3L6DHJQemUZvwq4kCK-WJfrVPVoJqXv08drjsuqNADn17g6hIX__pYO88zbDl_EtmNneTa-B5CjY3M3ihqZgbb2zAoC_rn3VXI_j36H3aqOpvrNVCMW6PNRyiHA4XhuLMEcnpnDSwiRLm6GrlHOQ9sFRFurUUM7WLogEZX8Cam1pyf2WU1e1W5SaPE1L-PgVny9YF1YQNNv3kB10Wj5-1vA9ZIC8WLvSG-x2op6NtaLnqv0hmxWqLXMsHPD1AqQNXZaFvd0o-BfRXgCTxNoOJmqaGUKlFd8wbqa5kGNwyzkDYzQaLXH3BubovRG1xD5iCW_Jb7W5hCpVy6K7F1BnTRxNtt-ZFFAW8OzWMmr_4GkNNFVXxbkcrpeJ-GnJoirJO3vs-K43BNRX3uczCFF39qSXFkAtFYs8yjy5PYy3zA1T35xIxDaNRkxxEPAlzQ8rA-KbRHkPsVwcZCcrQhYNfe6BdzFK3ZH98CkWz4C6fhpyLKqJBFrn7ZfWBR1oLev869HiqYfKjNxN57LsOzaBsgMIguQ_n4f51kmFlP028_QgbBvGd9ggl7EN1N5BC9zKIqqDg10JIAJu4BF_sEvKnrMHnD02Ifu_RQsplH3DFAO3IA7IGtDjzidMgoPm_HyqvE2g-QLD4KbpfS3Yr-fnkUT-hQXlO_ucj4I3Odr6Jrim97=w936-h929-s-no-gm?authuser=0" alt="4x4 Image" style={{ width: '12rem', height: '12rem' }} />
+                  <img src={qr} style={{ height: '250px', width: '250px' }}/>
+
+
                 
                   
                 </div>
