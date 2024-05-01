@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch('https://e-commerce-backend-a9ec.onrender.com/users');
       const users = await response.json();
 
       const user = users.find(

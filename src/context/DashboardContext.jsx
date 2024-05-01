@@ -16,16 +16,16 @@ export const DashboardProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const usersResponse = await axios.get('http://localhost:3000/users');
+      const usersResponse = await axios.get('https://e-commerce-backend-a9ec.onrender.com/users');
       setUsers(usersResponse.data);
 
-      const ordersResponse = await axios.get('http://localhost:3000/orders');
+      const ordersResponse = await axios.get('https://e-commerce-backend-a9ec.onrender.com/orders');
       setOrders(ordersResponse.data);
 
-      const categoriesResponse = await axios.get('http://localhost:3000/categories');
+      const categoriesResponse = await axios.get('https://e-commerce-backend-a9ec.onrender.com/categories');
       setCategories(categoriesResponse.data);
 
-      const productsResponse = await axios.get('http://localhost:3000/products');
+      const productsResponse = await axios.get('https://e-commerce-backend-a9ec.onrender.com/products');
       setProducts(productsResponse.data);
 
     } catch (error) {
@@ -57,12 +57,12 @@ export const DashboardProvider = ({ children }) => {
     }
   
     try {
-      const response = await axios.post('http://localhost:3000/users', newUser);
+      const response = await axios.post('https://e-commerce-backend-a9ec.onrender.com/users', newUser);
       setUsers([...users, response.data]);
       showAlert('success', 'User Added', 'User added successfully.');
       // Create a cart for the new user
       try {
-        await axios.post('http://localhost:3000/carts', {
+        await axios.post('https://e-commerce-backend-a9ec.onrender.com/carts', {
           id: newUser.id,
           user_id: newUser.id,
           items: []
@@ -72,7 +72,7 @@ export const DashboardProvider = ({ children }) => {
       }
       // Create a wishlist for the new user
       try {
-        await axios.post('http://localhost:3000/wishlists', {
+        await axios.post('https://e-commerce-backend-a9ec.onrender.com/wishlists', {
           id: newUser.id,
           user_id: newUser.id,
           items: []
@@ -97,7 +97,7 @@ export const DashboardProvider = ({ children }) => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3000/users/${userId}`);
+        await axios.delete(`https://e-commerce-backend-a9ec.onrender.com/users/${userId}`);
         setUsers(users.filter((user) => user.id !== userId));
         showAlert('success', 'User Deleted', 'User deleted successfully.');
       }
@@ -109,7 +109,7 @@ export const DashboardProvider = ({ children }) => {
   // Orders
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
-      await axios.patch(`http://localhost:3000/orders/${orderId}`, { order_status: newStatus });
+      await axios.patch(`https://e-commerce-backend-a9ec.onrender.com/orders/${orderId}`, { order_status: newStatus });
       fetchData();
     } catch (error) {
       handleOperationError('order', 'updating status');
@@ -119,7 +119,7 @@ export const DashboardProvider = ({ children }) => {
   // Categories
   const addCategory = async (newCategory) => {
     try {
-      const response = await axios.post('http://localhost:3000/categories', newCategory);
+      const response = await axios.post('https://e-commerce-backend-a9ec.onrender.com/categories', newCategory);
       setCategories([...categories, response.data]);
       showAlert('success', 'Category Added', 'Category added successfully.');
     } catch (error) {
@@ -139,7 +139,7 @@ export const DashboardProvider = ({ children }) => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3000/categories/${categoryId}`);
+        await axios.delete(`https://e-commerce-backend-a9ec.onrender.com/categories/${categoryId}`);
         setCategories(categories.filter((category) => category.id !== categoryId));
         showAlert('success', 'Category Deleted', 'Category deleted successfully.');
       }
@@ -150,7 +150,7 @@ export const DashboardProvider = ({ children }) => {
 
   const updateCategory = async (categoryId, updatedCategory) => {
     try {
-      await axios.put(`http://localhost:3000/categories/${categoryId}`, updatedCategory);
+      await axios.put(`https://e-commerce-backend-a9ec.onrender.com/categories/${categoryId}`, updatedCategory);
       fetchData();
       showAlert('success', 'Category Updated', 'Category updated successfully.');
     } catch (error) {
@@ -161,7 +161,7 @@ export const DashboardProvider = ({ children }) => {
   // Products
   const addProduct = async (newProduct) => {
     try {
-      const response = await axios.post('http://localhost:3000/products', newProduct);
+      const response = await axios.post('https://e-commerce-backend-a9ec.onrender.com/products', newProduct);
       setProducts([...products, response.data]);
       showAlert('success', 'Product Added', 'Product added successfully.');
     } catch (error) {
@@ -181,7 +181,7 @@ export const DashboardProvider = ({ children }) => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3000/products/${productId}`);
+        await axios.delete(`https://e-commerce-backend-a9ec.onrender.com/products/${productId}`);
         setProducts(products.filter((product) => product.id !== productId));
         showAlert('success', 'Product Deleted', 'Product deleted successfully.');
       }
@@ -192,7 +192,7 @@ export const DashboardProvider = ({ children }) => {
 
   const updateProduct = async (productId, updatedProduct) => {
     try {
-      await axios.put(`http://localhost:3000/products/${productId}`, updatedProduct);
+      await axios.put(`https://e-commerce-backend-a9ec.onrender.com/products/${productId}`, updatedProduct);
       fetchData();
       showAlert('success', 'Product Updated', 'Product updated successfully.');
     } catch (error) {

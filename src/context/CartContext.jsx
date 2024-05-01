@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async (userId) => {
     try {
       if (isAuthenticated) {
-        const response = await axios.get(`http://localhost:3000/carts?user_id=${userId}`);
+        const response = await axios.get(`https://e-commerce-backend-a9ec.onrender.com/carts?user_id=${userId}`);
         const fetchedCart = response.data[0];
         setCart(fetchedCart);
       }
@@ -37,7 +37,7 @@ export const CartProvider = ({ children }) => {
           ...cart,
           items: [...cart.items, { ...item }],
         };
-        const response = await axios.put(`http://localhost:3000/carts/${userID}`, updatedCart);
+        const response = await axios.put(`https://e-commerce-backend-a9ec.onrender.com/carts/${userID}`, updatedCart);
         const fetchedCart = response.data;
         setCart(fetchedCart);
         Swal.fire({
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
           items: [],
         };
 
-        await axios.put(`http://localhost:3000/carts/${userID}`, updatedCart);
+        await axios.put(`https://e-commerce-backend-a9ec.onrender.com/carts/${userID}`, updatedCart);
         setCart(updatedCart);
         Swal.fire({
           icon: 'success',
@@ -87,7 +87,7 @@ export const CartProvider = ({ children }) => {
           items: cart.items.filter((cartItem) => cartItem.id !== productId),
         };
   
-        await axios.put(`http://localhost:3000/carts/${userID}`, updatedCart);
+        await axios.put(`https://e-commerce-backend-a9ec.onrender.com/carts/${userID}`, updatedCart);
         setCart(updatedCart);
         Swal.fire({
           icon: 'success',

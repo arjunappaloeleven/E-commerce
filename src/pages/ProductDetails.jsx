@@ -25,7 +25,7 @@ const SingleProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/products/${productID}`);
+        const response = await axios.get(`https://e-commerce-backend-a9ec.onrender.com/products/${productID}`);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product details:', error);

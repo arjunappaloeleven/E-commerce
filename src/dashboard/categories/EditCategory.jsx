@@ -29,7 +29,7 @@ const EditCategory = () => {
     // Fetch product details by ID and set the form data
     const fetchCategoryDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/categories/${id}`);
+        const response = await axios.get(`https://e-commerce-backend-a9ec.onrender.com/categories/${id}`);
         const productData = response.data;
 
         setFormData({

@@ -19,7 +19,7 @@ export const WishlistProvider = ({ children }) => {
   const fetchWishlist = async (userId) => {
     try {
       if (isAuthenticated) {
-        const response = await axios.get(`http://localhost:3000/wishlists?user_id=${userId}`);
+        const response = await axios.get(`https://e-commerce-backend-a9ec.onrender.com/wishlists?user_id=${userId}`);
         const fetchedWishlist = response.data[0];
         setWishlist(fetchedWishlist);
         setTotal(fetchedWishlist.items.length);
@@ -51,7 +51,7 @@ const addToWishlist = async (item) => {
           items: [...wishlist.items, { ...item }],
         };
 
-        const response = await axios.put(`http://localhost:3000/wishlists/${userID}`, updatedWishlist);
+        const response = await axios.put(`https://e-commerce-backend-a9ec.onrender.com/wishlists/${userID}`, updatedWishlist);
         const fetchedWishlist = response.data;
         setWishlist(fetchedWishlist);
         setTotal(fetchedWishlist.items.length);
@@ -79,7 +79,7 @@ const addToWishlist = async (item) => {
           ...wishlist,
           items: [],
         };
-        await axios.put(`http://localhost:3000/wishlists/${userID}`, updatedWishlist);
+        await axios.put(`https://e-commerce-backend-a9ec.onrender.com/wishlists/${userID}`, updatedWishlist);
         setWishlist(updatedWishlist);
         setTotal(updatedWishlist.items.length); // Update total with updatedWishlist
         Swal.fire({
@@ -102,7 +102,7 @@ const addToWishlist = async (item) => {
           ...wishlist,
           items: wishlist.items.filter((item) => item.id !== productId),
         };
-        await axios.put(`http://localhost:3000/wishlists/${userID}`, updatedWishlist);
+        await axios.put(`https://e-commerce-backend-a9ec.onrender.com/wishlists/${userID}`, updatedWishlist);
         setWishlist(updatedWishlist);
         setTotal(updatedWishlist.items.length); // Update total with updatedWishlist
         Swal.fire({

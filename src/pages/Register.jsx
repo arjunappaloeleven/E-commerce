@@ -40,7 +40,7 @@ const Register = () => {
         try {
           // Check if email is already used
           const emailCheckResponse = await axios.get(
-            `http://localhost:3000/users?email=${email}`
+            `https://e-commerce-backend-a9ec.onrender.com/users?email=${email}`
           );
           if (emailCheckResponse.data.length > 0) {
             Swal.fire({
@@ -53,7 +53,7 @@ const Register = () => {
 
           // Check if phone is already used
           const phoneCheckResponse = await axios.get(
-            `http://localhost:3000/users?phone=${phone}`
+            `https://e-commerce-backend-a9ec.onrender.com/users?phone=${phone}`
           );
           if (phoneCheckResponse.data.length > 0) {
             Swal.fire({
@@ -77,7 +77,7 @@ const Register = () => {
           };
 
           const response = await axios.post(
-            'http://localhost:3000/users',
+            'https://e-commerce-backend-a9ec.onrender.com/users',
             userData,
             {
               headers: {
@@ -90,7 +90,7 @@ const Register = () => {
             setIsRegistered(true)
             // Create a cart for the user
             try {
-              await axios.post('http://localhost:3000/carts', {
+              await axios.post('https://e-commerce-backend-a9ec.onrender.com/carts', {
                 id: userData.id,
                 user_id: userData.id,
                 items: []
@@ -100,7 +100,7 @@ const Register = () => {
             }
             // Create a wishlist for the user
             try {
-              await axios.post('http://localhost:3000/wishlists', {
+              await axios.post('https://e-commerce-backend-a9ec.onrender.com/wishlists', {
                 id: userData.id,
                 user_id: userData.id,
                 items: []
